@@ -15,13 +15,13 @@ para subir:<br/>
 docker pull webcenter/activemq<br/>
 docker run --name='activemq' -it --rm -e 'ACTIVEMQ_CONFIG_MINMEMORY=512' -e 'ACTIVEMQ_CONFIG_MAXMEMORY=2048' -P webcenter/activemq:latest
 
-### robo PSHub<br/>
+### Robô PSHub<br/>
 Responsavel por rotear os topicos assinados e acionar os respectivos servicos (APIs)<br/>
 para subir:<br/>
 cd "PSHub\PSHub\bin\Debug\netcoreapp2.1"<br/>
 dotnet .\PSHub.dll
 
-### robo TicketManager<br/>
+### Robô TicketManager<br/>
 Responsavel por orquestrar caso necessario algum servico<br/>
 para subir:<br/>
 cd "TicketManager\TicketManager\bin\Debug\netcoreapp2.1"<br/>

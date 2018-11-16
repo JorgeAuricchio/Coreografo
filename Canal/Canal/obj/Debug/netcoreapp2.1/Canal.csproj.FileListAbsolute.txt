@@ -1,0 +1,10 @@
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\bin\Debug\netcoreapp2.1\Canal.deps.json
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\bin\Debug\netcoreapp2.1\Canal.runtimeconfig.json
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\bin\Debug\netcoreapp2.1\Canal.runtimeconfig.dev.json
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\bin\Debug\netcoreapp2.1\Canal.dll
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\bin\Debug\netcoreapp2.1\Canal.pdb
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\obj\Debug\netcoreapp2.1\Canal.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\obj\Debug\netcoreapp2.1\Canal.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\obj\Debug\netcoreapp2.1\Canal.AssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\obj\Debug\netcoreapp2.1\Canal.dll
+C:\Users\Jla\Source\Repos\Coreografo\Canal\Canal\obj\Debug\netcoreapp2.1\Canal.pdb

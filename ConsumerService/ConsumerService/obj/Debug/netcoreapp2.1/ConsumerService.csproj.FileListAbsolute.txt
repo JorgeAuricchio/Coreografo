@@ -1,0 +1,16 @@
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.RazorAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.RazorAssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.AssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\ConsumerService.deps.json
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\ConsumerService.runtimeconfig.json
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\ConsumerService.runtimeconfig.dev.json
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\ConsumerService.dll
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\ConsumerService.pdb
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\AMQ.dll
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\bin\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.RazorTargetAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.csproj.CopyComplete
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.dll
+C:\Users\Jla\Source\Repos\Coreografo\ConsumerService\ConsumerService\obj\Debug\netcoreapp2.1\ConsumerService.pdb

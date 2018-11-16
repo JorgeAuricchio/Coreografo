@@ -1,0 +1,17 @@
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.AssemblyInfoInputs.cache
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.AssemblyInfo.cs
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\ContaCorrente.deps.json
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\ContaCorrente.runtimeconfig.json
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\ContaCorrente.runtimeconfig.dev.json
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\ContaCorrente.dll
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\ContaCorrente.pdb
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.csprojAssemblyReference.cache
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.RazorAssemblyInfo.cache
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.RazorAssemblyInfo.cs
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.RazorTargetAssemblyInfo.cache
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.dll
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.pdb
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\AMQ.dll
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\bin\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Documents\Visual Studio 2017\Projects\ContaCorrente\ContaCorrente\obj\Debug\netcoreapp2.1\ContaCorrente.csproj.CopyComplete

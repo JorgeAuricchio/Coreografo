@@ -1,0 +1,17 @@
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AccountingService.deps.json
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AccountingService.runtimeconfig.json
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AccountingService.runtimeconfig.dev.json
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AccountingService.dll
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AccountingService.pdb
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AMQ.dll
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.csprojAssemblyReference.cache
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.RazorAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.RazorAssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.AssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.RazorTargetAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.csproj.CopyComplete
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.dll
+C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.pdb

@@ -1,0 +1,17 @@
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.RazorAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.RazorAssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.AssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\Ticket.deps.json
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\Ticket.runtimeconfig.json
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\Ticket.runtimeconfig.dev.json
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\Ticket.dll
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\Ticket.pdb
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\AMQ.dll
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\bin\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.RazorTargetAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.csproj.CopyComplete
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.dll
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.pdb
+C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.csprojAssemblyReference.cache

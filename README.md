@@ -3,6 +3,12 @@ Exemplo de Coreografia de Serviços via Broker
 
 ### Desenvolvido em .NetCore 2.1
 
+### Para rodar precisamos:
+Ter um equipamento com Windows ou Mac<br/>
+Visual Studio Community (windows ou mac)<br/>
+Docker
+
+## Componentes<br/>
 ### ActiveMQ<br/>
 Responsavel pela fila utilizada no Hub<br/>
 para subir:<br/>

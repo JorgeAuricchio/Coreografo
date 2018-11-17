@@ -22,7 +22,7 @@ Senha: admin
 Responsavel por armazenar logs das execucoes dos servicos/hub/ticketmanager<br/>
 para subir:<br/>
 docker pull docker.elastic.co/elasticsearch/elasticsearch:6.4.3<br/>
-docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.3
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" -e "http.cors.enabled=true" -e "http.cors.allow-origin=*" docker.elastic.co/elasticsearch/elasticsearch:6.4.3
 
 ### Robô PSHub<br/>
 Responsavel por rotear os topicos assinados e acionar os respectivos servicos (APIs)<br/>
@@ -70,6 +70,12 @@ Porta 9004<br/>
 para subir:<br/>
 cd "AccountingService\AccountingService\bin\Debug\netcoreapp2.1"<br/>
 dotnet .\AccountingService.dll
+
+## Robô Canal
+Responsável por simular a criação de ticketsbr/>
+para executar:<br/>
+cd "Canal\Canal\bin\Debug\netcoreapp2.1"<br/>
+dotnet .\Canal.dll
 
 ### Para ver os logs dos serviços basta acessar o ElasticSearch<br/>
    http://localhost:9200/coreografado/doc/_search<br/>

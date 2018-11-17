@@ -79,6 +79,8 @@ Post: <br/>
   }<br/>
 }<br/>
 
+Para visualizar use: https://www.getpostman.com/apps <br/>
+
 ### Próximos passos<br/>
    criar classes dos serviços e regras de negócio (incluir casos de erro)<br/>
    criar monitor grafico para ver os servicos atuando<br/>

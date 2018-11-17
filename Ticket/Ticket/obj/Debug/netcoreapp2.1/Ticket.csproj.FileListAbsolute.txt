@@ -14,4 +14,3 @@ C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticke
 C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.csproj.CopyComplete
 C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.dll
 C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.pdb
-C:\Users\Jla\Source\Repos\Coreografo\Ticket\Ticket\obj\Debug\netcoreapp2.1\Ticket.csprojAssemblyReference.cache

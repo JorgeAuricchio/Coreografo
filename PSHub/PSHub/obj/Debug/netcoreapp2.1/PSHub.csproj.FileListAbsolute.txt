@@ -1,6 +1,3 @@
-C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.csproj.CoreCompileInputs.cache
-C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.AssemblyInfoInputs.cache
-C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.AssemblyInfo.cs
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\appsettings.json
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\PSHub.deps.json
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\PSHub.runtimeconfig.json
@@ -9,6 +6,9 @@ C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\PSHub.d
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\PSHub.pdb
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\AMQ.dll
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.AssemblyInfo.cs
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.csproj.CopyComplete
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.dll
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.pdb

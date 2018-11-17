@@ -32,6 +32,7 @@ namespace Canal
 
                     string retorno = response1.Content.ReadAsStringAsync().Result;
                     Console.WriteLine(retorno);
+                 //   Console.ReadKey();
                 }
             }
         }

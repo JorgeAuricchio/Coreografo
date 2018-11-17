@@ -20,10 +20,12 @@ namespace OrderService.Controllers
             dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
 
             results.passo = "CreateOrder";
+            results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             stringData = JsonConvert.SerializeObject(results);
             string fila = results.fila;
+            string codigoTicket = results.codigoTicket;
 
-            mensagem.executa(fila, "TXN_1", stringData,"", "");
+            mensagem.executa(fila, "TXN_1", stringData, codigoTicket);
 
             return stringData;
         }

@@ -29,12 +29,14 @@ namespace TicketManager
                 {
                     Message request = receiver.Receive(new TimeSpan(0, 30, 0));
                     string replyTo = request.Properties.ReplyTo;
+                    string correlationID = request.Properties.CorrelationId;
+
                     if (null != request)
                     {
                         Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
 
-                        Console.WriteLine("FIM de operacao");
+                        Console.WriteLine("FIM de operacao: {0}", correlationID);
                         Console.WriteLine(stringData);
 
                         receiver.Accept(request);

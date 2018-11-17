@@ -10,6 +10,7 @@ namespace TicketManager
     public class termino
     {
         const string NOME_FILA_CONSUMIDOR_MQ = "consumidor";
+        const string MIME_TYPE_JSON = "application/json";
 
         public void monitorar()
         {
@@ -33,10 +34,26 @@ namespace TicketManager
                 {
                     Message request = receiver.Receive(new TimeSpan(0, 30, 0));
                     string replyTo = request.Properties.ReplyTo;
+                    string correlationID = request.Properties.CorrelationId;
+
                     if (null != request)
                     {
                         Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
+                        dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
+
+                        results.passo = "TerminoProcesso";
+                        results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
+                        string codigoTicket = correlationID;
+
+                        stringData = JsonConvert.SerializeObject(results);
+                        using (var client = new HttpClient())
+                        {
+                            var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
+
+                            Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + codigoTicket);
+                            HttpResponseMessage responseES = client.PostAsync(EndpointElasticSearchOK, contentDataES).Result;
+                        }
 
                         Console.WriteLine("FIM de operacao");
                         Console.WriteLine(stringData);

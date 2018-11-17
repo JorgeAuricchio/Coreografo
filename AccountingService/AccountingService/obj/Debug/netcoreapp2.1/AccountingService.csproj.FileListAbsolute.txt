@@ -5,7 +5,6 @@ C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Deb
 C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AccountingService.pdb
 C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AMQ.dll
 C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\bin\Debug\netcoreapp2.1\AMQ.pdb
-C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.csprojAssemblyReference.cache
 C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.csproj.CoreCompileInputs.cache
 C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.RazorAssemblyInfo.cache
 C:\Users\Jla\Source\Repos\Coreografo\AccountingService\AccountingService\obj\Debug\netcoreapp2.1\AccountingService.RazorAssemblyInfo.cs

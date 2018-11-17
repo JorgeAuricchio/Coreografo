@@ -1,0 +1,177 @@
+<script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
+<script src="bower_components/elasticsearch/elasticsearch.js"></script>
+<script>
+	var client = elasticsearch.Client({
+										host: 'http://localhost:9200'
+									});
+
+    var ticketsCad = [];
+	var intervalo;
+//delete ar[4]; // delete element with index 4
+//console.log( ar ); // [1, 2, 3, 4, undefined, 6]
+//alert( ar ); // 1,2,3,4,,6
+
+	function apagaTicket(valor)
+	{
+		for( var i = 0; i < ticketsCad.length; i++){ 
+			if ( ticketsCad[i] === valor) {
+			 ticketsCad.splice(i, 1); 
+			}
+		}	
+	}
+	
+
+	function procuraTicketLista()
+	{
+		for( var i = 0; i < ticketsCad.length; i++){ 
+			codigo = ticketsCad[i];
+			console.log(codigo);
+			procuraTicket(0, codigo).then(x => retornoQuery(x));
+		}	
+		//var intervalo = window.setInterval('procuraTicketLista()', 2000);
+	}
+			
+		
+
+		
+	$( document ).ready(function() {
+	//	asyncFunc().then(x => retornoQuery(x));
+		//intervalo = window.setInterval('procuraTicketLista()', 2000);
+	});
+
+	async function procuraTicket(posicao, codigoTicket) {
+		var resultado = await client.search({
+										index: 'coreografado',
+										from: 0,
+										type: 'tickets',
+										body: {
+												"query": {     "bool": {       "must": [        { "match": { "codigoTicket": codigoTicket }}        ]    }  }
+
+											  }/**/
+									}
+								   );
+		return resultado;
+	}
+	function retornoQuery(ret)
+	{
+		console.log(ret.hits.total);		
+		if (ret.hits.total > 0)
+		{
+			for(var cont = 0; cont < ret.hits.hits.length; cont++)
+			{
+				var retorno = ret.hits.hits[cont]._source;
+				var codigoTicket = retorno.codigoTicket;
+				var dataExecucao = retorno.dataExecucao;
+				var passo = retorno.passo;				
+
+				$('#' + codigoTicket + '_' + passo).html(dataExecucao);
+				
+				if (ret.hits.hits.length == 8
+				&& passo == 'TerminoProcesso') 
+				{
+					console.log('Apaguei: ' + codigoTicket);
+					apagaTicket(codigoTicket);
+				}
+			}			
+		}
+		intervalo = window.setInterval('procuraTicketLista()', 2000);
+	}
+
+	function pedido()
+	{
+		var nome = $('#txtNome').val()
+		var refeicao = $('#txtRefeicao').val()
+		var bebida = $('#txtBebida').val()
+		var data = '{"Cliente":"' + nome + '","Refeicao":"' + refeicao + '","Bebida":"' + bebida + '"}';
+		
+		$.ajax({
+             type: "POST",
+             url: 'http://localhost:9000/api/values',
+             data: data,
+             contentType: "application/json; charset=utf-8",
+             //crossDomain: true,
+             dataType: "json",
+             success: cadastroPedido,
+             error: cadastroPedido
+          });
+	}
+	
+	function cadastroPedido(retorno, status)
+	{
+		//debugger;
+		
+		if (status == "success")
+		{
+			var codigo = retorno.codigoTicket;
+			var cliente = retorno.Cliente;
+			var refeicao = retorno.Refeicao;
+			var bebida = retorno.Bebida;
+			
+			console.log(codigo);
+			ticketsCad[ticketsCad.length] = codigo;
+		//	procuraTicket(0, codigo).then(x => retornoQuery(x));
+			procuraTicketLista();
+			$("#tbPedidos").append("<tr>"+
+										"<td><span id='" + codigo + "_Ticket'>" + codigo+ "&nbsp;</span></td>"+
+										"<td><span>" + cliente+ "&nbsp;</span></td>"+
+										"<td><span>" + refeicao+ "&nbsp;</span></td>"+
+										"<td><span>" + bebida+ "&nbsp;</span></td>"+										
+										"<td><span id='" + codigo + "_InicioProcesso'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_ApproveTicket'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_VerifyConsumer'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_CreateTicket'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_AproveOrder'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_CreateOrder'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_AuthorizeCard'>&nbsp;</span></td>"+
+										"<td><span id='" + codigo + "_TerminoProcesso'>&nbsp;</span></td>"+
+									"</tr>" );
+//codigoTicket: "c84af1dd-31a7-4897-ac8e-136d45832dc1"
+//dataExecucao: "2018/11/17 02:46:29"
+		}
+	}
+</script>
+<html>
+	<table width="100%">
+		<tr>
+			<td colspan="2">Cadastro Pedido</td>
+		</tr>
+		<tr>
+			<td>Código do Atendente:</td>
+			<td><input type="text" id="txtAtendente" value="1"/></td>
+		</tr>
+		<tr>
+			<td>Nome do Cliente:</td>
+			<td><input type="text" id="txtNome" value="Pedro"/></td>
+		</tr>
+		<tr>
+			<td>Refeição:</td>
+			<td><input type="text" id="txtRefeicao" value="Macarrao"/></td>
+		</tr>
+		<tr>
+			<td>Bebida:</td>
+			<td><input type="text" id="txtBebida" value="Suco"/></td>
+		</tr>
+		<tr>
+			<td><input type="button" id="btnPedido" value="Realizar Pedido"/ onclick="pedido();"></td>
+		</tr>
+    </table>
+	<table width="100%" border="1" cellpadding="0" cellspacing="0" id="tbPedidos">
+		<tr>
+			<td colspan="12">Pedidos</td>
+		</tr>	
+		<tr>
+			<td>Ticket</td>
+			<td>Cliente</td>
+			<td>Refeição</td>
+			<td>Bebida</td>
+			<td>InicioProcesso</td>
+			<td>ApproveTicket</td>
+			<td>VerifyConsumer</td>
+			<td>CreateTicket</td>
+			<td>AproveOrder</td>
+			<td>CreateOrder</td>
+			<td>AuthorizeCard</td>
+			<td>TerminoProcesso</td>
+		</tr>
+    </table>			
+</html>

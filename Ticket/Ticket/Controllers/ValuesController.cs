@@ -24,10 +24,12 @@ namespace Ticket.Controllers
 
             results.codigoTicket = codigo;
             results.fila = "amqp://guest:guest@127.0.0.1:32772";
+            results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             stringData = JsonConvert.SerializeObject(results);
             string fila = results.fila;
             Console.WriteLine(stringData);
-            mensagem.executa(fila, "TXN", stringData, "", "");
+            Console.WriteLine("CorrelationID: {0}", codigo);
+            mensagem.executa(fila, "TXN", stringData, codigo);
             return stringData;
         }
        

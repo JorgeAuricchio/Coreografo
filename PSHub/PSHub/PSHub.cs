@@ -43,13 +43,13 @@ namespace PSHub
             if (results.Retries <= TENTATIVAS_RETRY)
             {
                 stringData = JsonConvert.SerializeObject(results);
-                gravaMensagem.executa(enderecoAMQ, topico, stringData, correlationID, replyTo);
+                gravaMensagem.executa(enderecoAMQ, topico, stringData, correlationID);
             }
             else
             {
                 results.numeroTentativasExcedidas = SIM;
                 stringData = JsonConvert.SerializeObject(results);
-                gravaMensagem.executa(enderecoAMQ, topico+ SUFIXO_MQ_ERRO, stringData, correlationID, replyTo);
+                gravaMensagem.executa(enderecoAMQ, topico+ SUFIXO_MQ_ERRO, stringData, correlationID);
             }
         }
 
@@ -74,10 +74,14 @@ namespace PSHub
                     Message request = receiver.Receive();
                     if (null != request)
                     {
+                        Console.WriteLine("Topico acionado: {0}", topico.topico);
                         Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
                         string correlationID = request.Properties.CorrelationId;
                         string replyTo = request.Properties.ReplyTo;
+
+                        Console.WriteLine("CRID: {0}", correlationID);
+                        Console.WriteLine("prp: {0}", request.Properties);
 
                         using (var client = new HttpClient())
                         {
@@ -94,6 +98,7 @@ namespace PSHub
                                         //posta elasticsearch
                                         var contentDataES = new StringContent(retorno, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
+                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + correlationID);
                                         HttpResponseMessage responseES = client.PostAsync(EndpointElasticSearchOK, contentDataES).Result;
                                     }
                                     else
@@ -103,6 +108,7 @@ namespace PSHub
                                         //posta elasticsearch
                                         var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
+                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
                                         HttpResponseMessage responseES = client.PostAsync(EndpointElasticSearchERRO, contentDataES).Result;
                                     }
                                 }
@@ -112,6 +118,7 @@ namespace PSHub
                                     //posta elasticsearch
                                     var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
+                                    Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
                                     HttpResponseMessage responseES = client.PostAsync(EndpointElasticSearchERRO, contentDataES).Result;
                                 }
                             }

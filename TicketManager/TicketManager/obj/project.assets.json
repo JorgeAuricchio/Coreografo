@@ -1475,6 +1475,16 @@
         "compile": {
           "ref/netstandard1.2/System.Threading.Timer.dll": {}
         }
+      },
+      "ElasticSearch/1.0.0": {
+        "type": "project",
+        "framework": ".NETCoreApp,Version=v2.1",
+        "compile": {
+          "bin/placeholder/ElasticSearch.dll": {}
+        },
+        "runtime": {
+          "bin/placeholder/ElasticSearch.dll": {}
+        }
       }
     }
   },
@@ -5064,11 +5074,17 @@
         "system.threading.timer.4.0.1.nupkg.sha512",
         "system.threading.timer.nuspec"
       ]
+    },
+    "ElasticSearch/1.0.0": {
+      "type": "project",
+      "path": "../../ElasticSearch/ElasticSearch.csproj",
+      "msbuildProject": "../../ElasticSearch/ElasticSearch.csproj"
     }
   },
   "projectFileDependencyGroups": {
     ".NETCoreApp,Version=v2.1": [
       "AMQPNetLite >= 2.1.5",
+      "ElasticSearch >= 1.0.0",
       "Microsoft.EntityFrameworkCore >= 2.1.4",
       "Microsoft.Extensions.Configuration >= 2.1.1",
       "Microsoft.Extensions.Configuration.Json >= 2.1.1",
@@ -5105,7 +5121,11 @@
       },
       "frameworks": {
         "netcoreapp2.1": {
-          "projectReferences": {}
+          "projectReferences": {
+            "C:\\Users\\Jla\\Source\\Repos\\Coreografo\\ElasticSearch\\ElasticSearch.csproj": {
+              "projectPath": "C:\\Users\\Jla\\Source\\Repos\\Coreografo\\ElasticSearch\\ElasticSearch.csproj"
+            }
+          }
         }
       },
       "warningProperties": {

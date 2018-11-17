@@ -9,6 +9,7 @@
       "PSHub/1.0.0": {
         "dependencies": {
           "AMQPNetLite": "2.1.5",
+          "ElasticSearch": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.1.4",
           "Microsoft.Extensions.Configuration": "2.1.1",
           "Microsoft.Extensions.Configuration.Json": "2.1.1",
@@ -873,6 +874,11 @@
           "System.Runtime": "4.1.0"
         }
       },
+      "ElasticSearch/1.0.0": {
+        "runtime": {
+          "ElasticSearch.dll": {}
+        }
+      },
       "AMQ/1.0.0.0": {
         "runtime": {
           "AMQ.dll": {
@@ -1462,6 +1468,11 @@
       "sha512": "sha512-saGfUV8uqVW6LeURiqxcGhZ24PzuRNaUBtbhVeuUAvky1naH395A/1nY0P2bWvrw/BreRtIB/EzTDkGBpqCwEw==",
       "path": "system.threading.timer/4.0.1",
       "hashPath": "system.threading.timer.4.0.1.nupkg.sha512"
+    },
+    "ElasticSearch/1.0.0": {
+      "type": "project",
+      "serviceable": false,
+      "sha512": ""
     },
     "AMQ/1.0.0.0": {
       "type": "reference",

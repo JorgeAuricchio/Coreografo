@@ -1,0 +1,8 @@
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\bin\Debug\netcoreapp2.1\ElasticSearch.deps.json
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\bin\Debug\netcoreapp2.1\ElasticSearch.dll
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\bin\Debug\netcoreapp2.1\ElasticSearch.pdb
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.AssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.dll
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.pdb

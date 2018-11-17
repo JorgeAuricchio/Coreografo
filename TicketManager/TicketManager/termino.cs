@@ -27,8 +27,8 @@ namespace TicketManager
                 connection = new Connection(address);
                 Session session = new Session(connection);
                 string topicoEntrada = config.Parametros.Termino.TopicoEntrada;
-
                 ReceiverLink receiver = new ReceiverLink(session, NOME_FILA_CONSUMIDOR_MQ, topicoEntrada);
+                ElasticSearch.ElasticSearch ES = new ElasticSearch.ElasticSearch();
 
                 while (true)
                 {
@@ -52,7 +52,7 @@ namespace TicketManager
                             var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
                             Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + codigoTicket);
-                            HttpResponseMessage responseES = client.PostAsync(EndpointElasticSearchOK, contentDataES).Result;
+                            ES.executa(EndpointElasticSearchOK, contentDataES);
                         }
 
                         Console.WriteLine("FIM de operacao");

@@ -12,3 +12,6 @@ C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.A
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.csproj.CopyComplete
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.dll
 C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.pdb
+C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\ElasticSearch.dll
+C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\bin\Debug\netcoreapp2.1\ElasticSearch.pdb
+C:\Users\Jla\Source\Repos\Coreografo\PSHub\PSHub\obj\Debug\netcoreapp2.1\PSHub.csprojAssemblyReference.cache

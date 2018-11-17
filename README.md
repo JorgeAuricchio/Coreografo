@@ -7,16 +7,16 @@ Exemplo de Coreografia de Serviços via Broker
 Responsavel pela fila utilizada no Hub<br/>
 para subir:<br/>
 docker pull webcenter/activemq<br/>
-docker run --name='activemq' -it --rm -e 'ACTIVEMQ_CONFIG_MINMEMORY=512' -e 'ACTIVEMQ_CONFIG_MAXMEMORY=2048' -P webcenter/activemq:latest
-Url: http://localhost:32771/admin/
-Usuário: admin
+docker run --name='activemq' -it --rm -e 'ACTIVEMQ_CONFIG_MINMEMORY=512' -e 'ACTIVEMQ_CONFIG_MAXMEMORY=2048' -P webcenter/activemq:latest<br/>
+Url: http://localhost:32771/admin/<br/>
+Usuário: admin<br/>
 Senha: admin
 
 ### ElasticSearch<br/>
 Responsavel por armazenar logs das execucoes dos servicos/hub/ticketmanager<br/>
 para subir:<br/>
 docker pull docker.elastic.co/elasticsearch/elasticsearch:6.4.3<br/>
-docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.3<br/>
+docker run -p 9200:9200 -p 9300:9300 -e "discovery.type=single-node" docker.elastic.co/elasticsearch/elasticsearch:6.4.3
 
 ### Robô PSHub<br/>
 Responsavel por rotear os topicos assinados e acionar os respectivos servicos (APIs)<br/>

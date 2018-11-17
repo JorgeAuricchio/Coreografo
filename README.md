@@ -72,7 +72,7 @@ cd "AccountingService\AccountingService\bin\Debug\netcoreapp2.1"<br/>
 dotnet .\AccountingService.dll
 
 ## Robô Canal
-Responsável por simular a criação de ticketsbr/>
+Responsável por simular a criação de tickets<br/>
 para executar:<br/>
 cd "Canal\Canal\bin\Debug\netcoreapp2.1"<br/>
 dotnet .\Canal.dll

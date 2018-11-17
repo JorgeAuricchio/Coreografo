@@ -5,7 +5,7 @@ Exemplo de Coreografia de Serviços via Broker
 
 ### Para rodar precisamos:
 Ter um equipamento com Windows ou Mac<br/>
-Visual Studio Community (windows ou mac)<br/>
+Visual Studio Community<br/>
 Docker
 
 ## Componentes<br/>

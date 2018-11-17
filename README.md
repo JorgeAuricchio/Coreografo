@@ -77,6 +77,12 @@ para executar:<br/>
 cd "Canal\Canal\bin\Debug\netcoreapp2.1"<br/>
 dotnet .\Canal.dll
 
+## Monitor (JQuery)
+Responsável exibir em tempo real a evolução dos tickets criados<br/>
+para executar:<br/>
+cd "Web"<br/>
+executar no browser .\monitor.html
+
 ### Para ver os logs dos serviços basta acessar o ElasticSearch<br/>
    http://localhost:9200/coreografado/doc/_search<br/>
 
@@ -95,6 +101,6 @@ Para visualizar use: https://www.getpostman.com/apps <br/>
 
 ### Próximos passos<br/>
    criar classes dos serviços e regras de negócio (incluir casos de erro)<br/>
-   criar monitor grafico para ver os servicos atuando<br/>
+   criar monitor grafico para ver os servicos atuando [em construção]<br/>
    criar conteineres de todos os servicos e consoles   <br/>
    criar testes unitarios

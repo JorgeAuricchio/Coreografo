@@ -100,7 +100,7 @@ dotnet .\Canal.dll
 Responsável exibir em tempo real a evolução dos tickets criados<br/>
 para executar:<br/>
 ```
-cd "Web"<br/>
+cd "Web"
 executar no browser .\monitor.html
 ```
 

@@ -129,7 +129,7 @@ Post:
 
 Para visualizar use: https://www.getpostman.com/apps <br/>
 
-Em todas as APIS foi colocado um Thread.Sleep para simular tempos diferentes de retorno.
+Em todas as APIs foi colocado um Thread.Sleep para simular tempos diferentes de retorno.
 
 ### Próximos passos<br/>
    criar classes dos serviços e regras de negócio (incluir casos de erro)<br/>

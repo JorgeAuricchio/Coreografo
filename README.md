@@ -88,6 +88,7 @@ dotnet .\KitchenService.dll
 
 ### API AccountingService<br/>
 API/Servico para demonstracao de coreografia, ainda nao tem regras de negocio<br/>
+Foi adicionada uma regra para autorizar ou negar uma transação<br/>
 Porta 9004<br/>
 para subir:<br/>
 ```
@@ -127,6 +128,8 @@ Post:
 ```
 
 Para visualizar use: https://www.getpostman.com/apps <br/>
+
+Em todas as APIS foi colocado um Thread.Sleep para simular tempos diferentes de retorno.
 
 ### Próximos passos<br/>
    criar classes dos serviços e regras de negócio (incluir casos de erro)<br/>

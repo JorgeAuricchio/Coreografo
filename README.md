@@ -12,7 +12,7 @@ Docker
 
 <a href="https://drive.google.com/open?id=1IDElG1HQziMcFWMFyWtwli-xDbb37c5H" target="_blank">formato PNG</a><br/>
 <a href="https://drive.google.com/open?id=1Q8mO7v46o1by8Q-ceGIPIA1nSZiMtkQM" target="_blank">formato do Draw.IO</a><br/>
-<a href="https://drive.google.com/open?id=1Q8mO7v46o1by8Q-ceGIPIA1nSZiMtkQM" target="_blank">Site do Draw.IO</a>
+<a href="https://www.draw.io" target="_blank">Site do Draw.IO</a>
  
 
 ## Componentes<br/>

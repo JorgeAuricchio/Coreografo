@@ -8,6 +8,9 @@ Ter um equipamento com Windows ou Mac<br/>
 Visual Studio Community<br/>
 Docker
 
+### Diagrama
+<img src="https://drive.google.com/file/d/1IDElG1HQziMcFWMFyWtwli-xDbb37c5H" height="100">
+
 ## Componentes<br/>
 ### ActiveMQ<br/>
 Responsavel pela fila utilizada no Hub<br/>

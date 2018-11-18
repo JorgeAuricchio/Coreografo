@@ -1,12 +1,9 @@
 <script src="https://code.jquery.com/jquery-3.3.1.min.js"></script>
 <script src="bower_components/elasticsearch/elasticsearch.js"></script>
 <script>
-	var client = elasticsearch.Client({
-										host: 'http://localhost:9200'
-									});
-
     var ticketsCad = [];
-	var intervalo;
+    var intervalo;
+    var execucoes = 0;
 //delete ar[4]; // delete element with index 4
 //console.log( ar ); // [1, 2, 3, 4, undefined, 6]
 //alert( ar ); // 1,2,3,4,,6
@@ -18,28 +15,27 @@
 			 ticketsCad.splice(i, 1); 
 			}
 		}	
-	}
-	
+	}	
 
 	function procuraTicketLista()
-	{
+    {
+        console.log('execucoes: ' + ++execucoes);
 		for( var i = 0; i < ticketsCad.length; i++){ 
 			codigo = ticketsCad[i];
-			console.log(codigo);
+			//console.log(codigo);
 			procuraTicket(0, codigo).then(x => retornoQuery(x));
-		}	
-		//var intervalo = window.setInterval('procuraTicketLista()', 2000);
-	}
-			
-		
-
-		
+        }        
+    }
+    
 	$( document ).ready(function() {
-	//	asyncFunc().then(x => retornoQuery(x));
-		//intervalo = window.setInterval('procuraTicketLista()', 2000);
+        intervalo = window.setInterval('procuraTicketLista()', 2000);
 	});
 
-	async function procuraTicket(posicao, codigoTicket) {
+    async function procuraTicket(posicao, codigoTicket) {
+        var client = elasticsearch.Client({
+            host: 'http://localhost:9200'
+        });
+
 		var resultado = await client.search({
 										index: 'coreografado',
 										from: 0,
@@ -50,11 +46,13 @@
 											  }/**/
 									}
 								   );
-		return resultado;
+
+        client = null;
+        return resultado;
 	}
 	function retornoQuery(ret)
 	{
-		console.log(ret.hits.total);		
+		//console.log(ret.hits.total);		
 		if (ret.hits.total > 0)
 		{
 			for(var cont = 0; cont < ret.hits.hits.length; cont++)
@@ -66,15 +64,18 @@
 
 				$('#' + codigoTicket + '_' + passo).html(dataExecucao);
 				
-				if (ret.hits.hits.length == 8
-				&& passo == 'TerminoProcesso') 
+                if ((//ret.hits.hits.length == 8
+                    //&& 
+                       passo == 'TerminoProcesso')
+                    || passo == 'ERRO'
+                    || passo == 'ORDEMCANCELADA') 
 				{
-					console.log('Apaguei: ' + codigoTicket);
+					console.log('Apagar: ' + codigoTicket);
 					apagaTicket(codigoTicket);
 				}
 			}			
 		}
-		intervalo = window.setInterval('procuraTicketLista()', 2000);
+		//intervalo = window.setInterval('procuraTicketLista()', 5000);
 	}
 
 	function pedido()
@@ -98,36 +99,39 @@
 	
 	function cadastroPedido(retorno, status)
 	{
-		//debugger;
-		
-		if (status == "success")
-		{
-			var codigo = retorno.codigoTicket;
-			var cliente = retorno.Cliente;
-			var refeicao = retorno.Refeicao;
-			var bebida = retorno.Bebida;
-			
-			console.log(codigo);
-			ticketsCad[ticketsCad.length] = codigo;
-		//	procuraTicket(0, codigo).then(x => retornoQuery(x));
-			procuraTicketLista();
-			$("#tbPedidos").append("<tr>"+
-										"<td><span id='" + codigo + "_Ticket'>" + codigo+ "&nbsp;</span></td>"+
-										"<td><span>" + cliente+ "&nbsp;</span></td>"+
-										"<td><span>" + refeicao+ "&nbsp;</span></td>"+
-										"<td><span>" + bebida+ "&nbsp;</span></td>"+										
-										"<td><span id='" + codigo + "_InicioProcesso'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_ApproveTicket'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_VerifyConsumer'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_CreateTicket'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_AproveOrder'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_CreateOrder'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_AuthorizeCard'>&nbsp;</span></td>"+
-										"<td><span id='" + codigo + "_TerminoProcesso'>&nbsp;</span></td>"+
-									"</tr>" );
-//codigoTicket: "c84af1dd-31a7-4897-ac8e-136d45832dc1"
-//dataExecucao: "2018/11/17 02:46:29"
-		}
+        if (status == "success") {
+            var codigo = retorno.codigoTicket;
+            var cliente = retorno.Cliente;
+            var refeicao = retorno.Refeicao;
+            var bebida = retorno.Bebida;
+
+            console.log('Ticket Criado:' + codigo);
+            ticketsCad[ticketsCad.length] = codigo;
+            procuraTicketLista();
+            $("#tbPedidos").append("<tr>" +
+                "<td><span id='" + codigo + "_Ticket'>" + codigo + "&nbsp;</span></td>" +
+                "<td><span>" + cliente + "&nbsp;</span></td>" +
+                "<td><span>" + refeicao + "&nbsp;</span></td>" +
+                "<td><span>" + bebida + "&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_InicioProcesso'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_CreateOrder'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_VerifyConsumer'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_CreateTicket'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_AuthorizeCard'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_RejectCard'>&nbsp;</span></td>" +                
+                "<td><span id='" + codigo + "_ApproveTicket'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_RejectTicket'>&nbsp;</span></td>" +                
+                "<td><span id='" + codigo + "_AproveOrder'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_RejectOrder'>&nbsp;</span></td>" +                
+                "<td><span id='" + codigo + "_TerminoProcesso'>&nbsp;</span></td>" +
+                "<td><span id='" + codigo + "_ERRO'>&nbsp;</span></td>" +                
+                "<td><span id='" + codigo + "_ORDEMCANCELADA'>&nbsp;</span></td>" +                
+                "</tr>");
+        }
+        else if (status == 'error')
+        {
+            alert('API de ticket indisponivel');
+        }
 	}
 </script>
 <html>
@@ -157,21 +161,27 @@
     </table>
 	<table width="100%" border="1" cellpadding="0" cellspacing="0" id="tbPedidos">
 		<tr>
-			<td colspan="12">Pedidos</td>
+			<td colspan="17">Pedidos</td>
 		</tr>	
-		<tr>
-			<td>Ticket</td>
-			<td>Cliente</td>
-			<td>Refeição</td>
-			<td>Bebida</td>
-			<td>InicioProcesso</td>
-			<td>ApproveTicket</td>
-			<td>VerifyConsumer</td>
-			<td>CreateTicket</td>
-			<td>AproveOrder</td>
-			<td>CreateOrder</td>
-			<td>AuthorizeCard</td>
-			<td>TerminoProcesso</td>
-		</tr>
+        <tr>
+            <td>Ticket</td>
+            <td>Cliente</td>
+            <td>Refeição</td>
+            <td>Bebida</td>
+            <td>InicioProcesso</td>
+            <td>CreateOrder</td>
+            <td>VerifyConsumer</td>
+            <td>CreateTicket</td>
+            <td>AuthorizeCard</td>
+            <td>RejectCard</td>
+            <td>ApproveTicket</td>
+            <td>RejectTicket</td>
+            <td>AproveOrder</td>
+            <td>RejectOrder</td>
+            <td>TerminoProcesso</td>
+            <td>Erro</td>
+            <td>ORDEMCANCELADA</td>
+        </tr>
     </table>			
 </html>
+

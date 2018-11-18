@@ -1,0 +1,15 @@
+version: '3'
+
+services:
+  accountingservice:
+    image: accountingservice
+    build:
+      context: .
+    ports:
+      - "9004:80"
+    networks:
+      - bridge
+
+networks: 
+    bridge:
+        driver: bridge

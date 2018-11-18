@@ -29,7 +29,7 @@ namespace PSHub
         const string MSG_TIMEOUT = "Timeout waiting for request. Keep waiting...";
         const string MIME_TYPE_JSON = "application/json";
 
-        private void retryMSG(string enderecoAMQ, string topico, string stringData, string correlationID, string replyTo, string erro)
+        private string retryMSG(string enderecoAMQ, string topico, string stringData, string correlationID, string replyTo, string erro)
         {
             AMQ.AMQ gravaMensagem = new AMQ.AMQ();
             dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
@@ -48,9 +48,12 @@ namespace PSHub
             else
             {
                 results.numeroTentativasExcedidas = SIM;
+                results.passo = "ERRO";
+                results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
                 stringData = JsonConvert.SerializeObject(results);
                 gravaMensagem.executa(enderecoAMQ, topico+ SUFIXO_MQ_ERRO, stringData, correlationID);
             }
+            return stringData;
         }
 
         private void NovaRotina(object parametro)
@@ -104,10 +107,10 @@ namespace PSHub
                                     }
                                     else
                                     {
-                                        retryMSG(topico.enderecoAMQ, topico.topico, stringData, correlationID, replyTo, responseHUB.StatusCode.ToString());
+                                        string msgErro = retryMSG(topico.enderecoAMQ, topico.topico, stringData, correlationID, replyTo, responseHUB.StatusCode.ToString());
 
                                         //posta elasticsearch
-                                        var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
+                                        var contentDataES = new StringContent(msgErro, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
                                         Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
                                         ES.executa(EndpointElasticSearchERRO, contentDataES);
@@ -115,9 +118,9 @@ namespace PSHub
                                 }
                                 catch (Exception erro)
                                 {
-                                    retryMSG(topico.enderecoAMQ, topico.topico, stringData, correlationID, replyTo, erro.Message.ToString());
+                                    string msgErro = retryMSG(topico.enderecoAMQ, topico.topico, stringData, correlationID, replyTo, erro.Message.ToString());
                                     //posta elasticsearch
-                                    var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
+                                    var contentDataES = new StringContent(msgErro, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
                                     Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
                                     ES.executa(EndpointElasticSearchERRO, contentDataES);

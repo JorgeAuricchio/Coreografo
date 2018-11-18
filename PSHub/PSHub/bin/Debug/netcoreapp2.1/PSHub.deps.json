@@ -8,13 +8,13 @@
     ".NETCoreApp,Version=v2.1": {
       "PSHub/1.0.0": {
         "dependencies": {
+          "AMQ": "1.0.0",
           "AMQPNetLite": "2.1.5",
           "ElasticSearch": "1.0.0",
           "Microsoft.EntityFrameworkCore": "2.1.4",
           "Microsoft.Extensions.Configuration": "2.1.1",
           "Microsoft.Extensions.Configuration.Json": "2.1.1",
-          "Newtonsoft.Json": "11.0.2",
-          "AMQ": "1.0.0.0"
+          "Newtonsoft.Json": "11.0.2"
         },
         "runtime": {
           "PSHub.dll": {}
@@ -874,17 +874,17 @@
           "System.Runtime": "4.1.0"
         }
       },
+      "AMQ/1.0.0": {
+        "dependencies": {
+          "AMQPNetLite": "2.1.5"
+        },
+        "runtime": {
+          "AMQ.dll": {}
+        }
+      },
       "ElasticSearch/1.0.0": {
         "runtime": {
           "ElasticSearch.dll": {}
-        }
-      },
-      "AMQ/1.0.0.0": {
-        "runtime": {
-          "AMQ.dll": {
-            "assemblyVersion": "1.0.0.0",
-            "fileVersion": "1.0.0.0"
-          }
         }
       }
     }
@@ -1469,13 +1469,13 @@
       "path": "system.threading.timer/4.0.1",
       "hashPath": "system.threading.timer.4.0.1.nupkg.sha512"
     },
-    "ElasticSearch/1.0.0": {
+    "AMQ/1.0.0": {
       "type": "project",
       "serviceable": false,
       "sha512": ""
     },
-    "AMQ/1.0.0.0": {
-      "type": "reference",
+    "ElasticSearch/1.0.0": {
+      "type": "project",
       "serviceable": false,
       "sha512": ""
     }

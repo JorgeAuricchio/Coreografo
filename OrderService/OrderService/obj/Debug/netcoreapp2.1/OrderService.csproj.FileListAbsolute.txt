@@ -1,8 +1,3 @@
-C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.csproj.CoreCompileInputs.cache
-C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.RazorAssemblyInfo.cache
-C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.RazorAssemblyInfo.cs
-C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.AssemblyInfoInputs.cache
-C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.AssemblyInfo.cs
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcoreapp2.1\OrderService.deps.json
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcoreapp2.1\OrderService.runtimeconfig.json
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcoreapp2.1\OrderService.runtimeconfig.dev.json
@@ -10,6 +5,12 @@ C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcore
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcoreapp2.1\OrderService.pdb
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcoreapp2.1\AMQ.dll
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\bin\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.csprojAssemblyReference.cache
+C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.csproj.CoreCompileInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.RazorAssemblyInfo.cache
+C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.RazorAssemblyInfo.cs
+C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.AssemblyInfoInputs.cache
+C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.AssemblyInfo.cs
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.RazorTargetAssemblyInfo.cache
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.csproj.CopyComplete
 C:\Users\Jla\Source\Repos\Coreografo\OrderService\OrderService\obj\Debug\netcoreapp2.1\OrderService.dll

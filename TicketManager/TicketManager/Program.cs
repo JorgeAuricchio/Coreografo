@@ -32,13 +32,11 @@ namespace TicketManager
 
                 parametros.Topico = erro.Topico;
                 parametros.EnderecoFila = erros.Parametros.EnderecoFila;
+                parametros.Descricao = erro.Descricao;
+                parametros.EndpointElasticSearchOK = erros.Parametros.EndpointElasticSearch.DoctoOK;
+                parametros.PassoRetorno = erro.PassoRetorno;
                 newThreadERRO.Start(parametros); //FALTA MAPEAR
             }
-
-
-
-
-
         }
     }
 }

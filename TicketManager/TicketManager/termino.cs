@@ -47,13 +47,12 @@ namespace TicketManager
                         string codigoTicket = correlationID;
 
                         stringData = JsonConvert.SerializeObject(results);
-                        using (var client = new HttpClient())
-                        {
-                            var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
-                            Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + codigoTicket);
-                            ES.executa(EndpointElasticSearchOK, contentDataES);
-                        }
+                        var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
+
+                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + codigoTicket);
+                        ES.executa(EndpointElasticSearchOK, contentDataES);
+                        
 
                         Console.WriteLine("FIM de operacao");
                         Console.WriteLine(stringData);

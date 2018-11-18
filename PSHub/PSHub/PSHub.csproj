@@ -14,13 +14,8 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\..\AMQ\AMQ\AMQ.csproj" />
     <ProjectReference Include="..\..\ElasticSearch\ElasticSearch.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Reference Include="AMQ">
-      <HintPath>..\..\AMQ\AMQ\bin\Debug\netcoreapp2.1\AMQ.dll</HintPath>
-    </Reference>
   </ItemGroup>
   <ItemGroup>
     <None Update="appsettings.json">

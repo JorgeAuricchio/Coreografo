@@ -8,6 +8,13 @@ Ter um equipamento com Windows ou Mac<br/>
 Visual Studio Community<br/>
 Docker
 
+### Diagrama
+
+<a href="https://drive.google.com/open?id=1IDElG1HQziMcFWMFyWtwli-xDbb37c5H" target="_blank">formato PNG</a><br/>
+<a href="https://drive.google.com/open?id=1Q8mO7v46o1by8Q-ceGIPIA1nSZiMtkQM" target="_blank">formato do Draw.IO</a><br/>
+<a href="https://www.draw.io" target="_blank">Site do Draw.IO</a>
+ 
+
 ## Componentes<br/>
 ### ActiveMQ<br/>
 Responsavel pela fila utilizada no Hub<br/>
@@ -81,6 +88,7 @@ dotnet .\KitchenService.dll
 
 ### API AccountingService<br/>
 API/Servico para demonstracao de coreografia, ainda nao tem regras de negocio<br/>
+Foi adicionada uma regra para autorizar ou negar uma transação<br/>
 Porta 9004<br/>
 para subir:<br/>
 ```
@@ -120,6 +128,8 @@ Post:
 ```
 
 Para visualizar use: https://www.getpostman.com/apps <br/>
+
+Em todas as APIs foi colocado um Thread.Sleep para simular tempos diferentes de retorno.
 
 ### Próximos passos<br/>
    criar classes dos serviços e regras de negócio (incluir casos de erro)<br/>

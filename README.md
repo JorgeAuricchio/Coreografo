@@ -96,6 +96,19 @@ cd "AccountingService\AccountingService\bin\Debug\netcoreapp2.1"
 dotnet .\AccountingService.dll
 ```
 
+### API de Sorteio - Desenvolvido em Node.JS<br/>
+API responsavel por incluir pedido num sorteio (exemplo para mostrar integração independente de onde a API foi desenvolvida<br/>
+Porta 8000<br/>
+para subir:<br/>
+```
+ter node.js instalado
+npm i express
+npm i body-parser
+npm i amqp10
+npm i node-datetime
+cd "NodeJS\SorteioService"
+node app
+```
 ## Robô Canal
 Responsável por simular a criação de tickets<br/>
 para executar:<br/>

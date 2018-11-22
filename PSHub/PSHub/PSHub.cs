@@ -78,15 +78,16 @@ namespace PSHub
                     Message request = receiver.Receive();
                     if (null != request)
                     {
-                        Console.WriteLine("Topico acionado: {0}", topico.topico);
-                        Console.WriteLine(request.Body);
+//                        Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
                         string correlationID = request.Properties.CorrelationId;
                         string replyTo = request.Properties.ReplyTo;
 
-                        Console.WriteLine("CRID: {0}", correlationID);
-                        Console.WriteLine("prp: {0}", request.Properties);
+                        //                        Console.WriteLine("CRID: {0}", correlationID);
+                        //                        Console.WriteLine("prp: {0}", request.Properties);
+                        dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
 
+                        Console.WriteLine("Topico acionado: {0}, Ticket: {1}, Passo: {2}", topico.topico, correlationID, results.passo);
                         using (var client = new HttpClient())
                         {
                             foreach (Rota rota in topico.rota)
@@ -102,7 +103,7 @@ namespace PSHub
                                         //posta elasticsearch
                                         var contentDataES = new StringContent(retorno, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
-                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + correlationID);
+                                        //                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + correlationID);
                                         ES.executa(EndpointElasticSearchOK, contentDataES);
                                     }
                                     else
@@ -112,7 +113,7 @@ namespace PSHub
                                         //posta elasticsearch
                                         var contentDataES = new StringContent(msgErro, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
-                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
+                                        //                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
                                         ES.executa(EndpointElasticSearchERRO, contentDataES);
                                     }
                                 }
@@ -122,7 +123,7 @@ namespace PSHub
                                     //posta elasticsearch
                                     var contentDataES = new StringContent(msgErro, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
-                                    Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
+                                    //                                    Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchERRO + correlationID);
                                     ES.executa(EndpointElasticSearchERRO, contentDataES);
                                 }
                             }
@@ -131,7 +132,7 @@ namespace PSHub
                     }
                     else
                     {
-                        Console.WriteLine(MSG_TIMEOUT);
+                     //   Console.WriteLine(MSG_TIMEOUT);
                     }
                 }
             }

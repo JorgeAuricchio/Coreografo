@@ -38,7 +38,7 @@ namespace TicketManager
 
                     if (null != request)
                     {
-                        Console.WriteLine(request.Body);
+                        //                        Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
                         dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
 
@@ -50,12 +50,12 @@ namespace TicketManager
 
                         var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
-                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + codigoTicket);
+                        //                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + codigoTicket);
                         ES.executa(EndpointElasticSearchOK, contentDataES);
                         
 
                         Console.WriteLine("FIM de operacao");
-                        Console.WriteLine(stringData);
+                        //                        Console.WriteLine(stringData);
                         receiver.Accept(request);
                     }
                 }

@@ -1,0 +1,260 @@
+﻿
+
+<!DOCTYPE html>
+<html lang="pt-br">
+<head>
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bower_components/elasticsearch/elasticsearch.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+    <style>
+        .cor1 {
+            background-color: #97ceb2;
+            align-content: center;
+        }
+
+        .cor2 {
+            background-color: #3ceeb9;
+            align-content: center;
+        }
+
+        .cor3 {
+            background-color: #d2b48c;
+            align-content: center;
+        }
+
+        .cor4 {
+            background-color: #c8537b;
+            align-content: center;
+        }
+
+        .cor5 {
+            background-color: #fefcd7;
+            align-content: center;
+        }
+
+        .cor6 {
+            background-color: #8382ff;
+            align-content: center;
+        }
+
+        .cor7 {
+            background-color: #d79ff0;
+            align-content: center;
+        }
+    </style>
+
+
+    <script>
+        var ticketsCad = [];
+        var intervalo;
+        var execucoes = 0;
+        //delete ar[4]; // delete element with index 4
+        //console.log( ar ); // [1, 2, 3, 4, undefined, 6]
+        //alert( ar ); // 1,2,3,4,,6
+
+        function apagaTicket(valor) {
+            for (var i = 0; i < ticketsCad.length; i++) {
+                if (ticketsCad[i] === valor) {
+                    ticketsCad.splice(i, 1);
+                }
+            }
+        }
+
+        function procuraTicketLista() {
+            console.log('execucoes: ' + ++execucoes);
+            for (var i = 0; i < ticketsCad.length; i++) {
+                codigo = ticketsCad[i];
+                //console.log(codigo);
+                procuraTicket(0, codigo).then(x => retornoQuery(x));
+            }
+        }
+
+        $(document).ready(function () {
+            intervalo = window.setInterval('procuraTicketLista()', 2000);
+        });
+
+        async function procuraTicket(posicao, codigoTicket) {
+            var client = elasticsearch.Client({
+                host: 'http://localhost:9200'
+            });
+
+            var resultado = await client.search({
+                index: 'coreografado',
+                from: 0,
+                type: 'tickets',
+                body: {
+                    "query": { "bool": { "must": [{ "match": { "codigoTicket": codigoTicket } }] } }
+
+                }/**/
+            }
+            );
+
+            client = null;
+            return resultado;
+        }
+        function retornoQuery(ret) {
+            //console.log(ret.hits.total);
+            if (ret.hits.total > 0) {
+                for (var cont = 0; cont < ret.hits.hits.length; cont++) {
+                    var retorno = ret.hits.hits[cont]._source;
+                    var codigoTicket = retorno.codigoTicket;
+                    var dataExecucao = retorno.dataExecucao;
+                    var passo = retorno.passo;
+
+                    $('#' + codigoTicket + '_' + passo).html(dataExecucao);
+
+                    if ((//ret.hits.hits.length == 8
+                        //&&
+                        passo == 'TerminoProcesso')
+                        || passo == 'ERRO'
+                        || passo == 'ORDEMCANCELADA') {
+                        console.log('Apagar: ' + codigoTicket);
+                        apagaTicket(codigoTicket);
+                    }
+                }
+            }
+            //intervalo = window.setInterval('procuraTicketLista()', 5000);
+        }
+
+        function pedido() {
+            var nome = $('#txtNome').val()
+            var refeicao = $('#txtRefeicao').val()
+            var bebida = $('#txtBebida').val()
+            var data = '{"Cliente":"' + nome + '","Refeicao":"' + refeicao + '","Bebida":"' + bebida + '"}';
+
+            $('#imgLoading').css('display', 'inline');
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:9000/api/values',
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                //crossDomain: true,
+                dataType: "json",
+                success: cadastroPedido,
+                error: cadastroPedido
+            });
+        }
+
+        function cadastroPedido(retorno, status) {
+            if (status == "success") {
+                var codigo = retorno.codigoTicket;
+                var cliente = retorno.Cliente;
+                var refeicao = retorno.Refeicao;
+                var bebida = retorno.Bebida;
+
+                console.log('Ticket Criado:' + codigo);
+                ticketsCad[ticketsCad.length] = codigo;
+                procuraTicketLista();
+                $("#tbPedidos").append("<tr>" +
+                    "<th scope='col' class='cor1'><span id='" + codigo + "_Ticket'>" + codigo + "&nbsp;</span></th>" +
+                    "<td class='cor1'><span>" + cliente + "&nbsp;</span></td>" +
+                    "<td class='cor1'><span>" + refeicao + "&nbsp;</span></td>" +
+                    "<td class='cor1'><span>" + bebida + "&nbsp;</span></td>" +
+                    "<td class='cor1'><span id='" + codigo + "_InicioProcesso'>&nbsp;</span></td>" +
+                    "<td class='cor1'><span id='" + codigo + "_CreateOrder'>&nbsp;</span></td>" +
+                    "<td class='cor2'><span id='" + codigo + "_VerifyConsumer'>&nbsp;</span></td>" +
+                    "<td class='cor3'><span id='" + codigo + "_CreateTicket'>&nbsp;</span></td>" +
+                    "<td class='cor4'><span id='" + codigo + "_AuthorizeCard'>&nbsp;</span></td>" +
+                    "<td class='cor4'><span id='" + codigo + "_RejectCard'>&nbsp;</span></td>" +
+                    "<td class='cor5'><span id='" + codigo + "_ApproveTicket'>&nbsp;</span></td>" +
+                    "<td class='cor5'><span id='" + codigo + "_RejectTicket'>&nbsp;</span></td>" +
+                    "<td class='cor6'><span id='" + codigo + "_AproveOrder'>&nbsp;</span></td>" +
+                    "<td class='cor6'><span id='" + codigo + "_RejectOrder'>&nbsp;</span></td>" +
+                    "<td class='cor7'><span id='" + codigo + "_TerminoProcesso'>&nbsp;</span></td>" +
+                    "<td class='cor7'><span id='" + codigo + "_ERRO'>&nbsp;</span></td>" +
+                    "<td class='cor7    '><span id='" + codigo + "_ORDEMCANCELADA'>&nbsp;</span></td>" +
+                    "</tr>");
+            }
+            else if (status == 'error') {
+                alert('API de ticket indisponivel');
+            }
+        }
+    </script>
+</head>
+
+<body>
+
+    <div class="row">
+
+        <div class="col-md-6 mb-3" style="border: 1px solid gray;width:50%;margin:0 auto;left:25%">
+
+            <div class="mb-3">
+                <label for="address">Nome do Cliente:</label>
+                <input type="text" class="form-control" id="txtNome" value="Pedro" placeholder="" required="">
+                <div class="invalid-feedback">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="address">Refeição:</label>
+                <input type="text" class="form-control" id="txtRefeicao" value="Macarrao" placeholder="" required="">
+                <div class="invalid-feedback">
+                    &nbsp;
+                </div>
+            </div>
+            <div class="mb-3">
+                <label for="address">Bebida:</label>
+                <input type="text" class="form-control" id="txtBebida" value="Suco" placeholder="" required="">
+                <div class="invalid-feedback">
+                    &nbsp;
+                </div>
+            </div>
+            <button id="btnPedido" class="btn btn-primary btn-lg btn-block" type="button" onclick="pedido();">Realizar Pedido</button>
+            <div class="invalid-feedback">
+                &nbsp;
+            </div>
+            <div class="invalid-feedback">
+                &nbsp;
+            </div>
+        </div>
+
+    </div>
+    <div class="invalid-feedback">
+        &nbsp;
+    </div>
+
+    <table class="table table-bordered">
+        <thead>
+            <tr>
+                <th scope="col" colspan="17">
+                    Pedidos
+                    <img src="img/loading.gif" width="30px" height="30px" id="imgLoading" style="display:none" />
+                </th>
+            </tr>
+            <tr>
+                <th scope="col" colspan="6" class="text-center">1</th>
+
+                <th scope="col" class="text-center">2</th>
+                <th scope="col" class="text-center">3</th>
+                <th scope="col" colspan="2" class="text-center">4</th>
+                <th scope="col" colspan="2" class="text-center">5</th>
+                <th scope="col" colspan="2" class="text-center">6</th>
+                <th scope="col" colspan="3" class="text-center">7</th>
+            </tr>
+            <tr>
+                <th scope="col" class="cor1">Ticket</th>
+                <th scope="col" class="cor1">Cliente</th>
+                <th scope="col" class="cor1">Refeição</th>
+                <th scope="col" class="cor1">Bebida</th>
+                <th scope="col" class="cor1">InicioProcesso</th>
+                <th scope="col" class="cor1">CreateOrder</th>
+                <th scope="col" class="cor2">VerifyConsumer</th>
+                <th scope="col" class="cor3">CreateTicket</th>
+                <th scope="col" class="cor4">AuthorizeCard</th>
+                <th scope="col" class="cor4">RejectCard</th>
+                <th scope="col" class="cor5">ApproveTicket</th>
+                <th scope="col" class="cor5">RejectTicket</th>
+                <th scope="col" class="cor6">AproveOrder</th>
+                <th scope="col" class="cor6">RejectOrder</th>
+                <th scope="col" class="cor7">TerminoProcesso</th>
+                <th scope="col" class="cor7">Erro</th>
+                <th scope="col" class="cor7">Cancelado</th>
+            </tr>
+        </thead>
+        <tbody id="tbPedidos"></tbody>
+    </table>
+
+</body>
+</html>
+

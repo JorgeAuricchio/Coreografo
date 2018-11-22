@@ -6,3 +6,4 @@ C:\Users\Jla\Source\Repos\Coreografo\AMQ\AMQ\obj\Debug\netcoreapp2.1\AMQ.Assembl
 C:\Users\Jla\Source\Repos\Coreografo\AMQ\AMQ\obj\Debug\netcoreapp2.1\AMQ.AssemblyInfo.cs
 C:\Users\Jla\Source\Repos\Coreografo\AMQ\AMQ\obj\Debug\netcoreapp2.1\AMQ.dll
 C:\Users\Jla\Source\Repos\Coreografo\AMQ\AMQ\obj\Debug\netcoreapp2.1\AMQ.pdb
+C:\Users\Jla\Source\Repos\Coreografo\AMQ\AMQ\obj\Debug\netcoreapp2.1\AMQ.csprojAssemblyReference.cache

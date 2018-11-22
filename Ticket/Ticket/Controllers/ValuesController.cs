@@ -20,7 +20,7 @@ namespace Ticket.Controllers
             int valueSleep = random.Next(1, 10) * 1000; //returns integer of 0-100
 
             Thread.Sleep(valueSleep);
-            Console.WriteLine("Sleep: {0}", valueSleep);
+            //            Console.WriteLine("Sleep: {0}", valueSleep);
             AMQ.AMQ mensagem = new AMQ.AMQ();
             string stringData = JsonConvert.SerializeObject(entrada);
             dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
@@ -32,8 +32,8 @@ namespace Ticket.Controllers
             results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             stringData = JsonConvert.SerializeObject(results);
             string fila = results.fila;
-            Console.WriteLine(stringData);
-            Console.WriteLine("CorrelationID: {0}", codigo);
+            //            Console.WriteLine(stringData);
+            //            Console.WriteLine("CorrelationID: {0}", codigo);
             mensagem.executa(fila, "TXN", stringData, codigo);
             return stringData;
         }

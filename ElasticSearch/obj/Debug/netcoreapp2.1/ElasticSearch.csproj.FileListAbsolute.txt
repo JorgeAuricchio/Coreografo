@@ -6,3 +6,4 @@ C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\Elast
 C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.AssemblyInfo.cs
 C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.dll
 C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.pdb
+C:\Users\Jla\Source\Repos\Coreografo\ElasticSearch\obj\Debug\netcoreapp2.1\ElasticSearch.csprojAssemblyReference.cache

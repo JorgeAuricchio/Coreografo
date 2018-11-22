@@ -21,7 +21,7 @@ namespace TicketManager
             string EndpointElasticSearchOK = param.EndpointElasticSearchOK;
             string passoRetorno = param.PassoRetorno;
 
-            Console.WriteLine("ERRO: " + topico);
+            Console.WriteLine("ERRO Monitorado: " + topico);
             Console.WriteLine("Descricao: " + descricao);            
             Connection connection = null;
             try
@@ -40,12 +40,12 @@ namespace TicketManager
 
                     if (null != request)
                     {
-                        Console.WriteLine(request.Body);
+                        //                        Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
                         dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
 
-                        Console.WriteLine("FIM de operacao: {0}", correlationID);
-                        Console.WriteLine(stringData);
+                        //Console.WriteLine("FIM de operacao: {0}", correlationID);
+                        //Console.WriteLine(stringData);
 
                         results.passo = passoRetorno;
                         results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
@@ -54,7 +54,7 @@ namespace TicketManager
 
                         var contentDataES = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
 
-                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK);
+                        //Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK);
                         ES.executa(EndpointElasticSearchOK, contentDataES);
 
                         receiver.Accept(request);

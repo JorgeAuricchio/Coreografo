@@ -20,7 +20,7 @@ namespace OrderService.Controllers
             int valueSleep = random.Next(1, 10) * 1000; //returns integer of 0-100
 
             Thread.Sleep(valueSleep);
-            Console.WriteLine("Sleep: {0}", valueSleep);
+            //            Console.WriteLine("Sleep: {0}", valueSleep);
             AMQ.AMQ mensagem = new AMQ.AMQ();
             string stringData = JsonConvert.SerializeObject(entrada);
             dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);

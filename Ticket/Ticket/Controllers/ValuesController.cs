@@ -31,6 +31,7 @@ namespace Ticket.Controllers
 
             results.codigoTicket = codigo;
             results.fila = enderecoFila;
+            results.passo = "InicioProcesso";
             results.dataExecucao = DateTime.Now.ToString("yyyy/MM/dd HH:mm:ss");
             stringData = JsonConvert.SerializeObject(results);
             string fila = results.fila;

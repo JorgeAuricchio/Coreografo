@@ -171,14 +171,15 @@
             });
         }
         function adicionaULPedido(ticket, nome, refeicao, bebida) {
-            $("#ulPedidos").append('<li class="list-group-item d-flex justify-content-between lh-condensed" id="li_' + ticket +'">'+
+            totalPedsGeral++;
+            $("#ulPedidos").append('<li class="list-group-item d-flex justify-content-between lh-condensed" id="li_' + ticket + '">' +
                 '<div id="dvPrd_' + ticket+'">'+
-                '<h6 class="my-0">' + ticket + '</h6>'+
+                '<h6 class="my-0">' + totalPedsGeral + ' - ' + ticket + '</h6>'+
                 '<small class="text-muted">' + nome + ' - ' + refeicao + ' - ' + bebida + ' - ' + '<b><i><span id="spnStatus_' + ticket + '">Aguardando...</span></i></b>' + '</small>'+
                     '</div>'+
                     '<span class="text-muted">&nbsp;</span>'+
                 '</li>');
-            $("#spnTotPed").html(++totalPedsGeral);
+            $("#spnTotPed").html(totalPedsGeral);
         }
         function cadastroPedido(retorno, status) {
             if (status == "success") {

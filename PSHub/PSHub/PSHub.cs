@@ -78,15 +78,11 @@ namespace PSHub
                     Message request = receiver.Receive();
                     if (null != request)
                     {
-//                        Console.WriteLine(request.Body);
                         string stringData = request.Body.ToString();
                         string correlationID = request.Properties.CorrelationId;
                         string replyTo = request.Properties.ReplyTo;
 
-                        //                        Console.WriteLine("CRID: {0}", correlationID);
-                        //                        Console.WriteLine("prp: {0}", request.Properties);
                         dynamic results = JsonConvert.DeserializeObject<dynamic>(stringData);
-
                         Console.WriteLine("Topico acionado: {0}, Ticket: {1}, Passo: {2}", topico.topico, correlationID, results.passo);
                         using (var client = new HttpClient())
                         {
@@ -95,6 +91,7 @@ namespace PSHub
                                 var contentData = new StringContent(stringData, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
                                 try
                                 {
+                                    //chama a API
                                     HttpResponseMessage responseHUB = client.PostAsync(rota.endereco, contentData).Result;
 
                                     if (responseHUB.StatusCode == System.Net.HttpStatusCode.OK)
@@ -102,8 +99,6 @@ namespace PSHub
                                         string retorno = responseHUB.Content.ReadAsStringAsync().Result;
                                         //posta elasticsearch
                                         var contentDataES = new StringContent(retorno, System.Text.Encoding.UTF8, MIME_TYPE_JSON);
-
-                                        //                                        Console.WriteLine("Gravando no ElasticSearch: {0}", EndpointElasticSearchOK + correlationID);
                                         ES.executa(EndpointElasticSearchOK, contentDataES);
                                     }
                                     else

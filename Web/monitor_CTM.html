@@ -1,0 +1,448 @@
+<!doctype html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+    <meta name="description" content="">
+    <meta name="author" content="">
+
+    <title>Monitor</title>
+
+    <script src="js/jquery-3.3.1.min.js"></script>
+    <script src="bootstrap/js/bootstrap.min.js"></script>
+    <script src="bower_components/elasticsearch/elasticsearch.js"></script>
+    <link href="bootstrap/css/bootstrap.min.css" rel="stylesheet" />
+
+    <script src="DataTables/datatables.min.js"></script>
+    <link href="DataTables/datatables.min.css" rel="stylesheet" />
+
+    <script language="javascript">
+        var tabela;
+        var ticketsCad = [];
+        var intervalo;
+        var execucoes = 0;
+        var totalPedsGeral = 0;
+        var debugMode = false;
+
+        $(document).ready(function () {
+            tabela = $('#dtHorizontalVerticalExample').DataTable({
+                "paging": false,
+                "searching": false
+                //"scrollX": true//,
+                //"scrollY": 200
+                //scrollY: "300px",
+                //scrollX: true,
+                //scrollCollapse: true,
+                //paging: false,
+                //fixedColumns: {
+                  //  leftColumns: 1
+                //}
+
+            });
+            $('.dataTables_length').addClass('bs-select');
+            //intervalo = window.setInterval('procuraTicketLista()', 2000);
+        });
+
+        function escreveLog(msg) {
+            if (debugMode) {
+                console.log(msg);
+            }
+        }
+
+        function apagaTicket(valor) {
+            for (var i = 0; i < ticketsCad.length; i++) {
+                if (ticketsCad[i] === valor) {
+                    ticketsCad.splice(i, 1);
+                }
+            }
+        }
+
+        function procuraTicketLista() {
+            console.log('execucoes: ' + ++execucoes);
+            for (var i = 0; i < ticketsCad.length; i++) {
+                codigo = ticketsCad[i];
+                //console.log(codigo);
+                procuraTicket(0, codigo).then(x => retornoQuery(x));
+            }
+        }
+
+
+        async function procuraTicket(posicao, codigoTicket) {
+            var client = elasticsearch.Client({
+                host: 'http://localhost:9200'
+            });
+
+            var resultado = await client.search({
+                index: 'coreografado',
+                from: 0,
+                type: 'tickets',
+                body: {
+                    "query": { "bool": { "must": [{ "match": { "codigoTicket": codigoTicket } }] } }
+
+                }/**/
+            }
+            );
+
+            client = null;
+            return resultado;
+        }
+        function retornoQuery(ret) {
+            //console.log(ret.hits.total);
+            if (ret.hits.total > 0) {
+                for (var cont = 0; cont < ret.hits.hits.length; cont++) {
+                    var retorno = ret.hits.hits[cont]._source;
+                    var codigoTicket = retorno.codigoTicket;
+                    var dataExecucao = retorno.dataExecucao;
+                    var passo = retorno.passo;
+
+                    var valorCel = $('#' + codigoTicket + '_' + passo).html();
+
+                    valorCel = valorCel.replace('&nbsp;', '');
+                    if (valorCel == '') {
+                        $('#' + codigoTicket + '_' + passo).html(dataExecucao);
+                        var passoStatus = $("#spnStatus_" + codigoTicket).html();
+
+                        escreveLog(passoStatus);
+                        if ((//ret.hits.hits.length == 8
+                            //&&
+                            passoStatus != 'TerminoProcesso')
+                            && passoStatus != 'ERRO'
+                            && passoStatus != 'ORDEMCANCELADA') {
+                            $("#spnStatus_" + codigoTicket).html(passo);
+                        }
+                        escreveLog(codigoTicket + ' - ' + passo);
+                        if ((//ret.hits.hits.length == 8
+                            //&&
+                            passo == 'TerminoProcesso')
+                            || passo == 'ERRO'
+                            || passo == 'ORDEMCANCELADA') {
+                            escreveLog('Apagar: ' + codigoTicket);
+                            apagaTicket(codigoTicket);
+
+                            var cor = '#bbf4e7';
+
+                            if (passo == 'ERRO') {
+                                cor = '#f4e1bb';
+                            }
+                            else if (passo == 'ORDEMCANCELADA') {
+                                cor = '#f68181';
+                            }
+                          //  $("#spnStatus_" + codigoTicket).html(passo);
+                            $('#dvPrd_' + codigoTicket).css('background-color', cor);
+                            $('#li_' + codigoTicket).css('background-color', cor);
+
+                            if (ticketsCad.length == 0) {
+                                //intervalo = window.setInterval('procuraTicketLista()', 2000);
+                                escreveLog('Desativando Escuta');
+                                manipulaLoading('none');
+                                intervalo = window.clearInterval(intervalo);
+                            }
+
+                            }
+                    }
+                }
+            }
+            //intervalo = window.setInterval('procuraTicketLista()', 5000);
+        }
+        function manipulaLoading(style) {
+            $('#imgLoading').css('display', style);
+            $('#imgLoading2').css('display', style);
+        }
+
+        function pedido() {
+            var nome = $('#txtNome').val()
+            var refeicao = $('#txtRefeicao').val()
+            var bebida = $('#txtBebida').val()
+            var data = '{"Cliente":"' + nome + '","Refeicao":"' + refeicao + '","Bebida":"' + bebida + '"}';
+
+            manipulaLoading('inline');
+            $.ajax({
+                type: "POST",
+                url: 'http://localhost:9000/api/values',
+                data: data,
+                contentType: "application/json; charset=utf-8",
+                //crossDomain: true,
+                dataType: "json",
+                success: cadastroPedido,
+                error: cadastroPedido
+            });
+        }
+        function adicionaULPedido(ticket, nome, refeicao, bebida) {
+            $("#ulPedidos").append('<li class="list-group-item d-flex justify-content-between lh-condensed" id="li_' + ticket +'">'+
+                '<div id="dvPrd_' + ticket+'">'+
+                '<h6 class="my-0">' + ticket + '</h6>'+
+                '<small class="text-muted">' + nome + ' - ' + refeicao + ' - ' + bebida + ' - ' + '<b><i><span id="spnStatus_' + ticket + '">Aguardando...</span></i></b>' + '</small>'+
+                    '</div>'+
+                    '<span class="text-muted">&nbsp;</span>'+
+                '</li>');
+            $("#spnTotPed").html(++totalPedsGeral);
+        }
+        function cadastroPedido(retorno, status) {
+            if (status == "success") {
+                var codigo = retorno.codigoTicket;
+                var cliente = retorno.Cliente;
+                var refeicao = retorno.Refeicao;
+                var bebida = retorno.Bebida;
+
+                if (ticketsCad.length == 0) {
+                    escreveLog('Ativando Escuta');
+                    intervalo = window.setInterval('procuraTicketLista()', 2000);
+                }
+
+
+                escreveLog('Ticket Criado:' + codigo);
+                ticketsCad[ticketsCad.length] = codigo;
+
+                adicionaULPedido(codigo, cliente, refeicao, bebida);
+               // procuraTicketLista();
+
+                var rowNode = tabela.row.add([
+                    "<span id='" + codigo + "_Ticket'>" + codigo + "&nbsp;</span>",
+                    "<span>" + cliente + "&nbsp;</span>",
+                    "<span>" + refeicao + "&nbsp;</span>",
+                    "<span>" + bebida + "&nbsp;</span>",
+                    "<span id='" + codigo + "_InicioProcesso'>&nbsp;</span>",
+                    "<span id='" + codigo + "_CreateOrder'>&nbsp;</span>",
+                    "<span id='" + codigo + "_VerifyConsumer'>&nbsp;</span>",
+                    "<span id='" + codigo + "_CreateTicket'>&nbsp;</span>",
+                    "<span id='" + codigo + "_AuthorizeCard'>&nbsp;</span>",
+                    "<span id='" + codigo + "_RejectCard'>&nbsp;</span>",
+                    "<span id='" + codigo + "_ApproveTicket'>&nbsp;</span>",
+                    "<span id='" + codigo + "_RejectTicket'>&nbsp;</span>",
+                    "<span id='" + codigo + "_AproveOrder'>&nbsp;</span>",
+                    "<span id='" + codigo + "_RejectOrder'>&nbsp;</span>",
+                    "<span id='" + codigo + "_TerminoProcesso'>&nbsp;</span>",
+                    "<span id='" + codigo + "_ERRO'>&nbsp;</span>",
+                    "<span id='" + codigo + "_ORDEMCANCELADA'>&nbsp;</span"
+
+                ]).draw().node();
+
+                $(rowNode).find('td').eq(0).addClass('cor1');
+                $(rowNode).find('td').eq(1).addClass('cor1');
+                $(rowNode).find('td').eq(2).addClass('cor1');
+                $(rowNode).find('td').eq(3).addClass('cor1');
+                $(rowNode).find('td').eq(4).addClass('cor1');
+                $(rowNode).find('td').eq(5).addClass('cor1');
+                $(rowNode).find('td').eq(6).addClass('cor2');
+                $(rowNode).find('td').eq(7).addClass('cor3');
+                $(rowNode).find('td').eq(8).addClass('cor4');
+                $(rowNode).find('td').eq(9).addClass('cor4');
+                $(rowNode).find('td').eq(10).addClass('cor5');
+                $(rowNode).find('td').eq(11).addClass('cor5');
+                $(rowNode).find('td').eq(12).addClass('cor6');
+                $(rowNode).find('td').eq(13).addClass('cor6');
+                $(rowNode).find('td').eq(14).addClass('cor7');
+                $(rowNode).find('td').eq(15).addClass('cor7');
+                $(rowNode).find('td').eq(16).addClass('cor7');         
+            }
+            else if (status == 'error') {
+                alert('API de ticket indisponivel');
+            }
+        }
+
+    </script>
+    <style>
+        .dtHorizontalVerticalExampleWrapper {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        #dtHorizontalVerticalExample th, td {
+            white-space: nowrap;
+        }
+
+        table.dataTable thead > tr > td.sorting,
+        table.dataTable thead > tr > td.sorting_asc,
+        table.dataTable thead > tr > td.sorting_desc,
+        table.dataTable thead > tr > th.sorting,
+        table.dataTable thead > tr > th.sorting_asc,
+        table.dataTable thead > tr > th.sorting_desc {
+            padding-right: 30px
+        }
+
+        table.dataTable thead .sorting,
+        table.dataTable thead .sorting_asc,
+        table.dataTable thead .sorting_asc_disabled,
+        table.dataTable thead .sorting_desc,
+        table.dataTable thead .sorting_desc_disabled {
+            cursor: pointer;
+            position: relative
+        }
+
+            table.dataTable thead .sorting:after,
+            table.dataTable thead .sorting:before,
+            table.dataTable thead .sorting_asc:after,
+            table.dataTable thead .sorting_asc:before,
+            table.dataTable thead .sorting_asc_disabled:after,
+            table.dataTable thead .sorting_asc_disabled:before,
+            table.dataTable thead .sorting_desc:after,
+            table.dataTable thead .sorting_desc:before,
+            table.dataTable thead .sorting_desc_disabled:after,
+            table.dataTable thead .sorting_desc_disabled:before {
+                position: absolute;
+                bottom: .5em;
+                display: block;
+                opacity: .3
+            }
+
+            table.dataTable thead .sorting:before,
+            table.dataTable thead .sorting_asc:before,
+            table.dataTable thead .sorting_asc_disabled:before,
+            table.dataTable thead .sorting_desc:before,
+            table.dataTable thead .sorting_desc_disabled:before {
+                right: 1em;
+                content: "\f0de";
+                font-family: FontAwesome;
+                font-size: 1rem
+            }
+
+            table.dataTable thead .sorting:after,
+            table.dataTable thead .sorting_asc:after,
+            table.dataTable thead .sorting_asc_disabled:after,
+            table.dataTable thead .sorting_desc:after,
+            table.dataTable thead .sorting_desc_disabled:after {
+                content: "\f0dd";
+                font-family: FontAwesome;
+                right: 16px;
+                font-size: 1rem
+            }
+
+            table.dataTable thead .sorting_asc:before,
+            table.dataTable thead .sorting_desc:after {
+                opacity: 1
+            }
+
+            table.dataTable thead .sorting_asc_disabled:before,
+            table.dataTable thead .sorting_desc_disabled:after {
+                opacity: 0
+            }
+
+        .cor1 {
+            background-color: #97ceb2;
+            text-align: center;
+        }
+
+            .cor2 {
+                background-color: #3ceeb9;
+                align-content: center;
+            }
+
+            .cor3 {
+                background-color: #d2b48c;
+                align-content: center;
+            }
+
+            .cor4 {
+                background-color: #c8537b;
+                align-content: center;
+            }
+
+            .cor5 {
+                background-color: #fefcd7;
+                align-content: center;
+            }
+
+            .cor6 {
+                background-color: #8382ff;
+                align-content: center;
+            }
+
+            .cor7 {
+                background-color: #d79ff0;
+                align-content: center;
+            }
+
+    </style>
+</head>
+
+<body class="bg-light">
+    <div class="container">
+        <div class="py-5 text-center">
+            <h2>Monitor</h2>
+            <p class="lead">Cria pedidos e os monitora.</p>
+        </div>
+        <div class="row">
+            <div class="col-md-4 order-md-2 mb-4">
+                <h4 class="d-flex justify-content-between align-items-center mb-3">
+                    <span class="text-muted">Pedidos Enviados<img src="img/loading.gif" width="30px" height="30px" id="imgLoading2" style="display:none" /></span>
+                    <span class="badge badge-secondary badge-pill"><span id="spnTotPed">0</span></span>
+                </h4>
+                <div style="overflow-y:auto;height:300px">
+                    <ul class="list-group mb-3" id="ulPedidos"></ul>
+                </div>
+            </div>
+            <div class="col-md-8 order-md-1">
+                <h4 class="mb-3">Cadastra Pedido</h4>
+                <form class="needs-validation" novalidate>
+                    <div class="mb-3">
+                        <label for="cliente">Nome do Cliente</label>
+                        <input type="text" class="form-control" id="txtNome" value="Pedro" placeholder="">
+                        <div class="invalid-feedback">
+                            Please enter your shipping address.
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6 mb-3">
+                            <label for="refeicao">Refeição</label>
+                            <input type="text" class="form-control" id="txtRefeicao" value="Macarrao" placeholder="">
+                            <div class="invalid-feedback">
+                                Valid first name is required.
+                            </div>
+                        </div>
+                        <div class="col-md-6 mb-3">
+                            <label for="bebida">Bebida</label>
+                            <input type="text" class="form-control" id="txtBebida" value="Suco" placeholder="">
+                            <div class="invalid-feedback">
+                                Valid last name is required.
+                            </div>
+                        </div>
+                    </div>
+                    <hr class="mb-4">
+                    <button class="btn btn-primary btn-lg btn-block" type="button" onclick="pedido();">Realizar Pedido</button>
+
+                </form>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-md-12 order-md-1">
+                <h4 class="mb-3">Lista de Pedidos<img src="img/loading.gif" width="30px" height="30px" id="imgLoading" style="display:none" /></h4>
+                <div style="width:100%;overflow-x:auto">
+                    <table id="dtHorizontalVerticalExample" class="table table-striped table-bordered table-sm " cellspacing="0" width="100%">
+                        <thead>
+                            <tr>
+                                <th colspan="6" class="text-center">1</th>
+
+                                <th class="text-center">2</th>
+                                <th class="text-center">3</th>
+                                <th colspan="2" class="text-center">4</th>
+                                <th colspan="2" class="text-center">5</th>
+                                <th colspan="2" class="text-center">6</th>
+                                <th colspan="3" class="text-center">7</th>
+                            </tr>
+                            <tr>
+                                <th class="cor1">Ticket</th>
+                                <th class="cor1">Cliente</th>
+                                <th class="cor1">Refeição</th>
+                                <th class="cor1">Bebida</th>
+                                <th class="cor1">InicioProcesso</th>
+                                <th class="cor1">CreateOrder</th>
+                                <th class="cor2">VerifyConsumer</th>
+                                <th class="cor3">CreateTicket</th>
+                                <th class="cor4">AuthorizeCard</th>
+                                <th class="cor4">RejectCard</th>
+                                <th class="cor5">ApproveTicket</th>
+                                <th class="cor5">RejectTicket</th>
+                                <th class="cor6">AproveOrder</th>
+                                <th class="cor6">RejectOrder</th>
+                                <th class="cor7">TerminoProcesso</th>
+                                <th class="cor7">Erro</th>
+                                <th class="cor7">Cancelado</th>
+                            </tr>
+                        </thead>
+                        <tbody></tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+</body>
+</html>
